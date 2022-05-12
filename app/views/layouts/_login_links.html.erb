@@ -1,18 +1,25 @@
 <%if !loged_user%>
   <li class="nav-item"><%=link_to 'LogIn', auth_path, class: 'nav-link active'%></li>
 <%elsif current_admin%>
-  <div class="dropdown">
-    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" 
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <%=current_admin.email%>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <%=link_to 'LogOut',  destroy_admin_session_path, 
-                                data: { "turbo-method": :delete }, class: 'dropdown-item'%>
-    </div>
-  </div>
-  <li class="nav-item"></li>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li><hr class="dropdown-divider"></li>
+      <li><%=link_to 'LogOut',  destroy_admin_session_path, 
+                                data: { "turbo-method": :delete }, class: 'dropdown-item'%></li>
+    </ul>
+  </li>
 <%elsif current_user%>
-  <li class="nav-item"><%=link_to 'LogOut',  destroy_user_session_path, 
-                                data: { "turbo-method": :delete }, class: 'nav-link active'%></li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <%=current_user.email%>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li><hr class="dropdown-divider"></li>
+      <li><%=link_to 'LogOut',  destroy_user_session_path, 
+                                data: { "turbo-method": :delete }, class: 'dropdown-item'%></li>
+    </ul>
+  </li>
 <%end%>
