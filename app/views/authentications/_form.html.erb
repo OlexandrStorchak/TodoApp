@@ -1,5 +1,17 @@
 <%= form_with url: "/auth", method: :post do |form| %>
-  <%= form.label :email, "Email" %>
-  <%= form.text_field :email %>
-  <%= form.submit "Log in!" %>
+  <form>
+    <div class="col-lg-8 mx-auto bg-light shadow rounded-1 p-2">
+      <div class="">
+        <div class="mb-1">
+          <%= form.label :email, "Email :", class: "form-label fs-3" %>
+        </div>
+        <div class="mb-1">
+          <%= form.text_field :email, class: "form-control bg-light", style:" text-align: center" %>
+        </div>
+        <div class="mt-4">
+          <%= form.submit "Log in!", class: "btn btn-primary fs-4 w-100" %>
+        </div>
+      </form>
+    </div>
+  </div>
 <% end %>
