@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   extend ActiveModel::Naming
   extend Enumerize
 
