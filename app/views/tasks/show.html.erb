@@ -6,9 +6,13 @@
     <%=@task.description%><br>
     Created by : <%=@task.user.email%><br>
     <div class="mt-5">
-      <%=link_to "Edit task", edit_task_path, class: "btn btn-outline-secondary"%>
-      <%=link_to "Delete task", task_path, class: "btn btn-outline-danger",
-        data: { "turbo-method": :delete }%>
+      <%if @task.user == current_user || current_user.role.admin?%>
+        <%=link_to "Edit task", edit_task_path, class: "btn btn-outline-secondary"%>
+      <%end%>
+      <%if current_user.role.admin?%>
+        <%=link_to "Delete task", task_path, class: "btn btn-outline-danger",
+        data: { "turbo-method": :delete , turbo_confirm: "Delete task #{@task.title}?"}%>
+      <%end%>
     </div>
   </div>
 </div>
