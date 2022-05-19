@@ -9,4 +9,28 @@ class TaskPolicy < ApplicationPolicy
   def index?
     user.present?
   end
+
+  def new?
+    user.present?
+  end
+
+  def create?
+    new?
+  end
+
+  def show?
+    user.present?
+  end
+
+  def edit?
+    record.user_id == user.id || user.role.admin?
+  end
+
+  def update?
+    edit?
+  end
+
+  def destroy?
+    user.role.admin?
+  end
 end

@@ -1,1 +1,14 @@
-<h1>Tasks</h1>
+<div class="row align-items-center mt-4">
+  <%@tasks.each do |task|%>
+    <div class="card shadow mb-1 mt-1 bg-light">
+      <div class=" cart-title fs-4 ">
+        <%=task.title%>
+      </div>
+      <div class=" cart-body  ">
+        <div class=" ">
+          created by : <%=task.user.email%> <%=link_to "", task_path(task), class:"stretched-link"%>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>

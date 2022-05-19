@@ -1,0 +1,14 @@
+<div class="card text-center mt-4 bg-light">
+  <div class="card-title mt-1">
+    <%=@task.title%>
+  </div>
+  <div class="card-body">
+    <%=@task.description%><br>
+    Created by : <%=@task.user.email%><br>
+    <div class="mt-5">
+      <%=link_to "Edit task", edit_task_path, class: "btn btn-outline-secondary"%>
+      <%=link_to "Delete task", task_path, class: "btn btn-outline-danger",
+        data: { "turbo-method": :delete }%>
+    </div>
+  </div>
+</div>
