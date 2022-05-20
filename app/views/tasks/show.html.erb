@@ -1,18 +1,23 @@
 <div class="card text-center mt-4 bg-light">
-  <div class="card-title mt-1">
+  <div class="card-title mt-1 fs-3">
     <%=@task.title%>
+    <%= ' - ( Todo! <i class="bi bi-circle text-primary"></i> ) '.html_safe if @task.status.todo? %>
+    <%=' - ( In progress ... <i class="bi bi-hourglass-split text-warning"></i> ) '.html_safe if @task.status.inprogress? %>
+    <%=' - ( Done! <i class="bi bi-check-circle-fill text-success"></i> ) '.html_safe if @task.status.done? %>
   </div>
   <div class="card-body">
-    <%=@task.description%><br>
+    <div>
+      <%=@task.description%>
+    </div>
     Created by : <%=@task.user.email%>
     <%if (@task.user == current_user && @task.created_at + 2.hours > Time.now) && current_user.user?%>
       <div class="mt-5">
-        <%=link_to "Can edit until #{ time_until_edit(@task)}".html_safe, edit_task_path, class: "btn btn-outline-secondary"%>
+        <%=link_to "Can edit until #{ time_until_edit(@task)}".html_safe, edit_task_path, class: "btn btn-outline-secondary "%>
       </div>
     <%end%>
     <%if current_user.role.admin?%>
       <div class="mt-5">
-        <%=link_to "Edit".html_safe, edit_task_path, class: "btn btn-outline-secondary"%>
+        <%=link_to "Edit".html_safe, edit_task_path, class: "btn btn-outline-secondary "%>
         <%=link_to "Delete task", task_path, class: "btn btn-outline-danger",
         data: { "turbo-method": :delete , turbo_confirm: "Delete task #{@task.title}?"}%>
       </div>
