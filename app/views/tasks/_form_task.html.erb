@@ -21,6 +21,10 @@
         <%= f.submit "Create", class: "btn btn-primary fs-4 w-100" %>
       </div>
     <%else%>
+      <div class="mb-1 ">
+        <%= f.select :status, [["To do!", "todo"], ["In progress", "inprogress"], ["Done", "done"]],
+                          {}, {class: "form-select form-select-lg mb-1 mt-3"}  %>
+      </div>
       <div class="mb-1 mt-3">
         <%= f.submit "Save", class: "btn btn-primary fs-4 w-100" %>
       </div>

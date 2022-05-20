@@ -1,6 +1,8 @@
 class Task < ApplicationRecord
   belongs_to :user
 
+  extend ActiveModel::Naming
+  extend Enumerize
   enumerize :status,
             in: { :todo => 1, :inprogress => 2, :done => 3 },
             default: :todo,
