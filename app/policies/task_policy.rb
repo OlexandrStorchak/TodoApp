@@ -23,7 +23,7 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def edit?
-    record.user_id == user.id || user.role.admin?
+    (record.user_id == user.id && record.created_at + 2.hours > DateTime.now) || user.role.admin?
   end
 
   def update?
