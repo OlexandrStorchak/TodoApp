@@ -6,12 +6,14 @@
     <div class="mb-1">
       <%= f.text_field :title, autofocus: true, class: "form-control bg-light", style:" text-align: center" %>
     </div>
+    <%=form_errors_helper(@task,:title)%>
     <div class="mb-1">
       <%= f.label :descrition, class: "form-label fs-3"  %>
     </div>
     <div class="mb-1">
       <%= f.text_area :description, size: "50x5", class: "form-control bg-light", style:" text-align: center" %>
     </div>
+    <%=form_errors_helper(@task,:description)%>
     <div class="mb-1">
     </div>
     <%if @task.new_record?%>

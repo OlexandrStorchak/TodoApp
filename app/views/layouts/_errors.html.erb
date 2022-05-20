@@ -1,0 +1,7 @@
+<div class="alert-danger rounded-bottom p-1">
+  <%obj.errors.where(column).each do |error|%>
+    <div>
+      <%=error.message%>
+    </div>
+  <%end%>
+</div>
