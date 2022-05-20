@@ -4,7 +4,8 @@ class TasksController < ApplicationController
   before_action :authorize_task
 
   def index
-    @tasks = Task.all
+    @tasks = Task.all if current_user.admin?
+    @tasks = current_user.tasks.all if current_user.user?
   end
 
   def new

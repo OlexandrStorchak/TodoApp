@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+  has_many :tasks, dependent: :destroy
   extend ActiveModel::Naming
   extend Enumerize
 
