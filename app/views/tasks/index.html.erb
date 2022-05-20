@@ -14,9 +14,11 @@
       </div>
     </div>
   <%end%>
-  <div class="container pagination justify-content-center border-top mt-3">
-    <div class="mt-2">
-      <%== pagy_bootstrap_nav(@pagy, style: "margin: 0 auto;") %>
+  <%if @pagy.pages > 1%>
+    <div class="container pagination justify-content-center border-top mt-3">
+      <div class="mt-2">
+        <%== pagy_bootstrap_nav(@pagy, style: "margin: 0 auto;")  %>
+      </div>
     </div>
-  </div>
+  <%end%>
 </div>
