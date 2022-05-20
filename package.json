@@ -9,6 +9,7 @@
     "bootstrap-icons": "^1.8.1",
     "esbuild": "^0.14.39",
     "jquery": "^3.6.0",
+    "local-time": "^2.1.0",
     "popper.js": "^1.16.1",
     "sass": "^1.51.0"
   },
