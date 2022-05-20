@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
-
+  scope :filter_by_status, ->(status, user_id) { where status: status, user_id: user_id }
+  scope :filter_by_user_id, ->(user_id) { where user_id: user_id }
   extend ActiveModel::Naming
   extend Enumerize
   enumerize :status,
