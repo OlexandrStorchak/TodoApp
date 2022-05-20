@@ -77,3 +77,5 @@ group :test do
 end
 
 gem "local_time", "~> 2.1"
+
+gem "pagy", "~> 5.10"
