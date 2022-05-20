@@ -3,9 +3,11 @@
     <div class="card shadow mb-1 mt-1 bg-light">
       <div class=" cart-title fs-4 ">
         <%=task.title%>
-        <%='<i class="bi bi-check-circle"></i>'.html_safe if task.status.todo? %>
-        <%='<div><i class="bi bi-hourglass-split"></i></div>'.html_safe if task.status.inprogress? %>
-        <%='<i class="bi bi-check-circle-fill"></i>'.html_safe if task.status.done? %>
+        <div class="text-end">
+          <%='<i class="bi bi-circle text-primary"></i>'.html_safe if task.status.todo? %>
+          <%='<i class="bi bi-hourglass-split text-warning"></i>'.html_safe if task.status.inprogress? %>
+          <%='<i class="bi bi-check-circle-fill text-success"></i>'.html_safe if task.status.done? %>
+        </div>
       </div>
       <div class=" cart-body  ">
         <div class=" ">
