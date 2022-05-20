@@ -4,9 +4,7 @@
       <div class=" cart-title fs-4 ">
         <%=task.title%>
         <div class="text-end">
-          <%='<i class="bi bi-circle text-primary"></i>'.html_safe if task.status.todo? %>
-          <%='<i class="bi bi-hourglass-split text-warning"></i>'.html_safe if task.status.inprogress? %>
-          <%='<i class="bi bi-check-circle-fill text-success"></i>'.html_safe if task.status.done? %>
+          <%=render partial: "status",locals: {task: task}%>
         </div>
       </div>
       <div class=" cart-body  ">

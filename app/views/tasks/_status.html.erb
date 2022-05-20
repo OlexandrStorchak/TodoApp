@@ -1,0 +1,3 @@
+<%= 'Todo! <i class="bi bi-circle text-primary"></i>'.html_safe if task.status.todo? %>
+<%='In progress ... <i class="bi bi-hourglass-split text-warning"></i>'.html_safe if task.status.inprogress? %>
+<%='Done! <i class="bi bi-check-circle-fill text-success"></i>'.html_safe if task.status.done? %>
