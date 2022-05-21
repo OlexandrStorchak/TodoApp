@@ -60,14 +60,4 @@ class TasksController < ApplicationController
   def authorize_task
     authorize(@task || Task)
   end
-
-  def sort_reverse
-    if session[:sort_rev] == true
-      session[:sort_rev] = false
-      @pagy, @tasks = pagy(current_user.tasks.order(status: :asc))
-    else
-      session[:sort_rev] = true
-      @pagy, @tasks = pagy(current_user.tasks.order(status: :desc))
-    end
-  end
 end
