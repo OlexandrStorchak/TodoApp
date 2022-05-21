@@ -1,7 +1,10 @@
 <div class="col-lg-8 mx-auto bg-light shadow rounded-1 p-3 mt-5">
   <%= form_with model: @user do |f| %>
     <div class="mb-1">
-      <%= f.email_field :email, autofocus: true, class: "form-control bg-light", placeholder: "Email", style:" text-align: center" %>
+      <div class=" fs-3 text-end">
+        <%=render partial: "role", locals: {user: @user}%>
+      </div>
+      <%= f.email_field :email, autofocus: true, class: "form-control bg-light", disabled: !current_user.admin?, placeholder: "Email", style:" text-align: center" %>
     </div>
     <%=form_errors_helper(@user,:email)%>
     <div class="mb-1">
@@ -12,10 +15,10 @@
       <%= f.text_field :last_name, autofocus: true, class: "form-control bg-light", placeholder: "Last name", style:" text-align: center" %>
     </div>
     <%=form_errors_helper(@user,:last_name)%>
-    <%if !@user.role.admin? && current_user.admin?%>
+    <%if current_user.admin?%>
       <div class="mb-1 ">
         <%= f.select :role, User.role.values,
-                          {}, {class: "form-select form-select-lg mb-1 mt-3"} %>
+                          {}, {class: "form-select form-select-lg mb-1 mt-3",disabled: @user.id == current_user.id} %>
       </div>
     <%end%>
     <div class="mb-1 mt-3">
