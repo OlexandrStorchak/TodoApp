@@ -1,0 +1,17 @@
+<div class="row align-items-center mt-4">
+  <%@users.each do |user|%>
+    <div class="card shadow mb-1 mt-1 bg-light">
+      <div class=" cart-title fs-4 ">
+        <%=user.email%>
+        <div class="text-end">
+          <%=render partial: "role",locals: {user: user}%>
+        </div>
+      </div>
+      <div class=" cart-body  ">
+        <div class=" ">
+          <%=link_to "", edit_user_path(user), class:"stretched-link"%>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
