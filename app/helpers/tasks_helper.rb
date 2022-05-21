@@ -9,10 +9,10 @@ module TasksHelper
   end
 
   def sort_reverse_button
-    if params[:sort_status] == "desc"
-      link_to " Sort by status", tasks_path + "?sort_status=asc", class: "btn btn-sm btn-outline-info ms-1 bi bi-arrow-down-up"
-    else
+    if params[:sort_status] == "asc"
       link_to " Sort by status", tasks_path + "?sort_status=desc", class: "btn btn-sm btn-outline-info ms-1 bi bi-arrow-down-up"
+    else
+      link_to " Sort by status", tasks_path + "?sort_status=asc", class: "btn btn-sm btn-outline-info ms-1 bi bi-arrow-down-up"
     end
   end
 end
