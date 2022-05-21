@@ -1,42 +1,38 @@
-<nav class="navbar sticky-top shadow navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <%=link_to "TodoApp", root_path, class: "navbar-brand fs-4"%>
-    <%if current_user.present?%>
-      <%=link_to " New task", new_task_path, class: "btn btn btn-outline-primary m-1 bi bi-plus-circle"%>
-    <%end%>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+<nav class="navbar container-fluid sticky-top shadow navbar-expand-xxl navbar-light bg-light">
+  <%=link_to "TodoApp", root_path, class: "navbar-brand fs-4"%>
+  <%if current_user.present?%>
+    <%=link_to " New task", new_task_path, class: "btn btn btn-outline-primary m-1 bi bi-plus-circle"%>
+  <%end%>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <%if current_user.present?%>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <%if current_user.present?%>
-          <ul class="navbar-nav ms-2 p-1 ">
-            <li><%=link_to " All tasks", tasks_path, class: "btn btn-sm btn-outline-primary ms-1 bi bi-list-task"%></li>
-            <li><%=sort_reverse_button%></li>
-            <li> <%=link_to " Todo task", tasks_path+"?status=todo", 
-                                              class: "btn btn-sm btn-outline-info ms-1 bi bi-circle"%></li>
-            <li> <%=link_to " In progress task", tasks_path+"?status=inprogress", 
-                                              class: "btn btn-sm btn-outline-info ms-1 bi bi-hourglass-split"%></li>
-            <li> <%=link_to " Done", tasks_path+"?status=done",
-                                              class: "btn btn-sm btn-outline-info ms-1 bi bi-check-circle-fill"%></li>
-          </ul>
-          <%if current_user.admin?%>
-            <%=form_with url: '/', method: :get, local: true  do |f|%>
-              <div class="input-group ms-2">
-                <%=f.label "Filter by User : ", class:"input-group-text"%>
-                <%= f.collection_select :user_id, User.order(:email), :id, :email, {}, {class: "form-select form-select-sm"}  %>
-                <%=f.submit "Show", class: "btn btn-sm btn-outline-secondary"%>
-              </div>
-            <%end%>
-            <%=link_to " All users tasks", tasks_path+"?all_users=show", class: "btn btn-outline-secondary ms-3 bi bi-people"%>
-            <%=link_to " All users ", users_path, class: "btn btn-outline-secondary ms-1 bi bi-people"%>
+      <div class="navbar-nav ms-2 ">
+        <%=link_to " All tasks", tasks_path, class: "btn btn-sm btn-outline-primary ms-1 bi bi-list-task"%>
+        <%=sort_reverse_button%>
+        <%=link_to " Todo task", tasks_path+"?status=todo", 
+                                              class: "btn btn-sm btn-outline-info ms-1 bi bi-circle"%>
+        <%=link_to " In progress task", tasks_path+"?status=inprogress", 
+                                              class: "btn btn-sm btn-outline-info ms-1 bi bi-hourglass-split"%>
+        <%=link_to " Done", tasks_path+"?status=done",
+                                              class: "btn btn-sm btn-outline-info ms-1 bi bi-check-circle-fill"%>
+        <%if current_user.admin?%>
+          <%=form_with url: '/', method: :get, local: true  do |f|%>
+            <div class="input-group ms-1 pe-1">
+              <%=f.label "Filter by User : ", class:"input-group-text"%>
+              <%= f.collection_select :user_id, User.order(:email), :id, :email, {}, {class: "form-select"}  %>
+              <%=f.submit "Show", class: "btn btn-sm btn-outline-secondary"%>
+            </div>
           <%end%>
+          <%=link_to " All users tasks", tasks_path+"?all_users=show", class: "btn btn-outline-secondary ms-1 bi bi-people"%>
+          <%=link_to " All users ", users_path, class: "btn btn-outline-secondary ms-1 bi bi-people"%>
         <%end%>
-      </ul>
-      <ul class="navbar-nav">
-        <%=render partial: "layouts/login_links"%>
-      </ul>
+        <ul class="navbar-nav">
+          <%=render partial: "layouts/login_links"%>
+        </ul>
+      </div>
     </div>
-  </div>
+  <%end%>
 </nav>
