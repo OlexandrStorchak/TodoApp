@@ -8,7 +8,7 @@ module Authorization
   private
 
   def user_not_authorized
-    flash[:notice] = "Sorry, You Are Not Authorized To Do This"
+    flash[:alert] = "Sorry, You Are Not Authorized To Do This"
     redirect_to(request.referrer || root_path)
   end
 end

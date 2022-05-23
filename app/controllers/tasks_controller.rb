@@ -4,11 +4,22 @@ class TasksController < ApplicationController
   before_action :authorize_task
 
   def index
-    @pagy, @tasks = pagy(current_user.tasks.all) if current_user.present?
-    @pagy, @tasks = pagy(Task.all) if params[:all_users].present? && current_user.admin?
-    @pagy, @tasks = pagy(current_user.tasks.order(status: params[:sort_status])) if params[:sort_status].present? && current_user.present?
+    @pagy, @tasks = pagy(current_user.tasks.all)
+    @pagy, @tasks = pagy(current_user.tasks.order(status: params[:sort_status])) if params[:sort_status].present?
     @pagy, @tasks = pagy(Task.filter_by_status(params[:status], current_user.id)) if params[:status].present?
-    @pagy, @tasks = pagy(Task.filter_by_user_id(params[:user_id])) if params[:user_id].present? && current_user.admin?
+  end
+
+  def tasks_by_user
+    if params[:user_id].present?
+      @pagy, @tasks = pagy(Task.filter_by_user_id(params[:user_id]))
+      flash[:notice] = "All tasks by #{User.find_by(id: params[:user_id])&.email}"
+    else
+      render index
+    end
+  end
+
+  def all_users_tasks
+    @pagy, @tasks = pagy(Task.all)   
   end
 
   def new
