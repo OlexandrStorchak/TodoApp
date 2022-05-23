@@ -1,6 +1,9 @@
 <div class="card text-center mt-4 bg-light">
-  <div class="card-title mt-1 fs-3">
-    <%=@task.title%> - <%=render partial: "status", locals: {task: @task}%>
+  <div class="card-title text-truncate w-50 mx-auto mt-1 fs-3">
+    <%=@task.title%>
+    <p>
+      <%=render partial: "status", locals: {task: @task}%>
+    </p>
   </div>
   <div class="card-body">
     <div>

@@ -6,3 +6,9 @@
   src: font-url("bootstrap-icons/font/fonts/bootstrap-icons.woff2") format("woff2"),
     font-url("bootstrap-icons/font/fonts/bootstrap-icons.woff") format("woff");
 }
+.cards{
+  transition: all 0.1s ease;
+}
+.cards:hover{
+  transform: scale(1.02);
+}
