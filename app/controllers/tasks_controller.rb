@@ -12,7 +12,7 @@ class TasksController < ApplicationController
   def tasks_by_user
     if params[:user_id].present?
       @pagy, @tasks = pagy(Task.filter_by_user_id(params[:user_id]))
-      flash[:notice] = "All tasks by #{User.find_by(id: params[:user_id])&.email}"
+      flash.now[:notice] = "All tasks by #{User.find_by(id: params[:user_id])&.email}"
     else
       render index
     end
