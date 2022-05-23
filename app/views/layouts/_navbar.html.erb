@@ -22,10 +22,10 @@
                                               class: "btn btn-sm btn-outline-info ms-1 bi bi-check-circle-fill"%>
           </ul>
           <%if current_user.admin?%>
-            <%=form_with url: '/', method: :get, local: true  do |f|%>
+            <%=form_with url: root_path, method: :get do |f|%>
               <div class="input-group p-1">
-                <%= f.collection_select :user_id, User.order(:email), :id, :email, {}, {class: "form-select form-select-sm"}  %>
-                <%=f.submit "Show", class: "btn btn-outline-secondary"%>
+                <%= f.collection_select :user_id, User.order(:email), :id, :email, {}, {class: "form-select form-select-sm", selected: params[:user_id]}  %>
+                <%=f.button "Show", class: "btn btn-outline-secondary"%>
               </div>
             <%end%>
             <%=link_to " All users tasks", tasks_path+"?all_users=show", class: "btn btn-outline-secondary ms-1 bi bi-people"%>
