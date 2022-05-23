@@ -1,17 +1,19 @@
 <div class="row align-items-center mt-4">
   <%=index_page_tasks_list_empty(@tasks)%>
   <%@tasks.each do |task|%>
-    <div class="card shadow mb-1 mt-1 bg-light">
-      <div class="cart-title fs-3 text-center">
-        <%=task.title%>
-        <div class="text-end">
+    <div class="cards">
+      <div class="card shadow mb-1 mt-1 bg-light p-1 ">
+        <div class="cart-title fs-3 text-center w-50 mx-auto text-truncate">
+          <%=task.title%>
+        </div>
+        <div class="fs-3 text-end">
           <%=render partial: "status",locals: {task: task}%>
         </div>
-      </div>
-      <div class="cart-body">
-        <div class="text-secondary">
-          created by : <%=task.user.email%> <%=link_to "", task_path(task), class:"stretched-link "%>,
-          at : <%=local_time(task.created_at, :long)%>
+        <div class="cart-body">
+          <div class="text-secondary">
+            created by : <%=task.user.email%> <%=link_to "", task_path(task), class:"stretched-link "%>,
+            at : <%=local_time(task.created_at, :long)%>
+          </div>
         </div>
       </div>
     </div>
