@@ -2,15 +2,16 @@
   <%=index_page_tasks_list_empty(@tasks)%>
   <%@tasks.each do |task|%>
     <div class="card shadow mb-1 mt-1 bg-light">
-      <div class=" cart-title fs-4 ">
+      <div class="cart-title fs-3 text-center">
         <%=task.title%>
         <div class="text-end">
           <%=render partial: "status",locals: {task: task}%>
         </div>
       </div>
-      <div class=" cart-body  ">
-        <div class=" ">
-          created by : <%=task.user.email%> <%=link_to "", task_path(task), class:"stretched-link"%>
+      <div class="cart-body">
+        <div class="text-secondary">
+          created by : <%=task.user.email%> <%=link_to "", task_path(task), class:"stretched-link "%>,
+          at : <%=local_time(task.created_at, :long)%>
         </div>
       </div>
     </div>

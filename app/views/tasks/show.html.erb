@@ -6,17 +6,20 @@
     <div>
       <%=@task.description%>
     </div>
-    Created by : <%=@task.user.email%>
+    <div class="text-secondary mt-5 border-bottom">
+      Created by : <%=@task.user.email%>, at : <%=local_time(@task.created_at, :long)%>
+    </div>
     <%if (@task.user == current_user && @task.created_at + 2.hours > Time.now) && current_user.user?%>
-      <div class="mt-5">
-        <%=link_to "Can edit until #{ time_until_edit(@task)}".html_safe, edit_task_path, class: "btn btn-outline-secondary "%>
+      <div class="mt-2">
+        <%=link_to "Can edit until #{ time_until_edit(@task)}".html_safe, 
+                                                          edit_task_path, class: "btn btn-outline-secondary "%>
       </div>
     <%end%>
     <%if current_user.role.admin?%>
-      <div class="mt-5">
+      <div class="mt-2">
         <%=link_to "Edit ".html_safe, edit_task_path, class: "btn btn-outline-secondary "%>
         <%=link_to "Delete task", task_path, class: "btn btn-outline-danger",
-        data: { "turbo-method": :delete , turbo_confirm: "Delete task #{@task.title}?"}%>
+                                data: { "turbo-method": :delete , turbo_confirm: "Delete task #{@task.title}?"}%>
       </div>
     <%end%>
   </div>

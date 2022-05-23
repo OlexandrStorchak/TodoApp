@@ -1,0 +1,4 @@
+trailing_commas false
+parens_in_def :dynamic
+quote_style :single
+
