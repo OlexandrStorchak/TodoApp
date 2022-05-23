@@ -6,7 +6,8 @@ ruby "3.0.0"
 gem "devise"
 gem "enumerize"
 gem "pundit"
-
+gem "local_time", "~> 2.1"
+gem "pagy", "~> 5.10"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
@@ -56,6 +57,8 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "rspec-rails", "~> 5.1", ">= 5.1.2"
+  gem "shoulda-matchers", "~> 5.0"
 end
 
 group :development do
@@ -75,7 +78,3 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
-gem "local_time", "~> 2.1"
-
-gem "pagy", "~> 5.10"
