@@ -14,11 +14,11 @@
           <ul class="navbar-nav ms-2 p-1 ">
             <%=link_to " All tasks", tasks_path, class: "btn btn-sm btn-outline-primary ms-1 bi bi-list-task"%>
             <%=sort_reverse_button%>
-            <%=link_to " Todo task", tasks_path+"?status=todo", 
+            <%=link_to " Todo tasks", tasks_path+"?status=todo", 
                                               class: "btn btn-sm btn-outline-info ms-1 bi bi-circle"%>
-            <%=link_to " In progress task", tasks_path+"?status=inprogress", 
+            <%=link_to " In progress tasks", tasks_path+"?status=inprogress", 
                                               class: "btn btn-sm btn-outline-info ms-1 bi bi-hourglass-split"%>
-            <%=link_to " Done", tasks_path+"?status=done",
+            <%=link_to " Done tasks", tasks_path+"?status=done",
                                               class: "btn btn-sm btn-outline-info ms-1 bi bi-check-circle-fill"%>
           </ul>
           <%if current_user.admin?%>
@@ -29,7 +29,7 @@
               </div>
             <%end%>
             <%=link_to " All users tasks", all_users_tasks_path, class: "btn btn-outline-secondary ms-1 bi bi-people"%>
-            <%=link_to " All users ", users_path, class: "btn btn-outline-secondary ms-1 bi bi-people"%>
+            <%=link_to " All users", users_path, class: "btn btn-outline-secondary ms-1 bi bi-people"%>
           <%end%>
         <%end%>
       </ul>
