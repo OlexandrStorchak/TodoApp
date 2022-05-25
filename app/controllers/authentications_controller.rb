@@ -1,6 +1,5 @@
 class AuthenticationsController < ApplicationController
-  def index
-  end
+  def index; end
 
   def do_auth
     if !Admin.find_by(email: params[:email]).nil?

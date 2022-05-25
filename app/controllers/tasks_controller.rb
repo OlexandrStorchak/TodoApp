@@ -5,8 +5,16 @@ class TasksController < ApplicationController
 
   def index
     @pagy, @tasks = pagy(current_user.tasks.all)
-    @pagy, @tasks = pagy(current_user.tasks.order(status: params[:sort_status])) if params[:sort_status].present?
-    @pagy, @tasks = pagy(Task.filter_by_status(params[:status], current_user.id)) if params[:status].present?
+    sort_tasks_by_status if params[:sort_status].present?
+    filter_tasks_by_status if params[:status].present?
+  end
+
+  def sort_tasks_by_status
+    @pagy, @tasks = pagy(current_user.tasks.order(status: params[:sort_status]))
+  end
+
+  def filter_tasks_by_status
+    @pagy, @tasks = pagy(Task.filter_by_status(params[:status], current_user.id))
   end
 
   def tasks_by_user
@@ -19,7 +27,7 @@ class TasksController < ApplicationController
   end
 
   def all_users_tasks
-    @pagy, @tasks = pagy(Task.all)   
+    @pagy, @tasks = pagy(Task.all)
   end
 
   def new
@@ -27,25 +35,23 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(get_task_params)
+    @task = Task.new(task_params)
     @task.user_id = current_user.id
     if @task.save
-      flash[:notice] = "Task successfully created"
+      flash[:notice] = 'Task successfully created'
       redirect_to @task
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @task.update(get_task_params)
-      flash[:notice] = "Task successfully edited"
+    if @task.update(task_params)
+      flash[:notice] = 'Task successfully edited'
       redirect_to @task
     else
       render :edit, status: :unprocessable_entity
@@ -54,13 +60,13 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    flash[:notice] = "Task successfully deleted"
+    flash[:notice] = 'Task successfully deleted'
     redirect_to tasks_path, status: :see_other
   end
 
   private
 
-  def get_task_params
+  def task_params
     params.require(:task).permit(:title, :description, :status)
   end
 

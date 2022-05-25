@@ -1,11 +1,11 @@
 class Task < ApplicationRecord
-  belongs_to :user, optional: true
-
   extend ActiveModel::Naming
   extend Enumerize
 
+  belongs_to :user, optional: true
+
   enumerize :status,
-            in: { :todo => 1, :inprogress => 2, :done => 3 },
+            in: { todo: 1, inprogress: 2, done: 3 },
             default: :todo,
             predicates: true
 

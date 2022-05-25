@@ -24,7 +24,8 @@
           <%if current_user.admin?%>
             <%=form_with url: tasks_by_user_path, method: :get do |f|%>
               <div class="input-group p-1">
-                <%= f.collection_select :user_id, User.order(:id), :id, :email, { promt: false, selected: params[:user_id] || current_user.id}, {class: "form-select form-select-sm"}  %>
+                <%= f.collection_select :user_id, User.order(:id), :id, :email,
+                 { promt: false, selected: params[:user_id] || current_user.id}, {class: "form-select form-select-sm"}  %>
                 <%=f.button "Show", class: "btn btn-outline-secondary"%>
               </div>
             <%end%>
