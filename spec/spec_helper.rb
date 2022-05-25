@@ -13,7 +13,11 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'rails_helper'
+  require 'support/controller_helpers'
 RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+    config.include ControllerHelpers, type: :controller
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
