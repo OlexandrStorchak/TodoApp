@@ -15,7 +15,7 @@ module Tasks
       all_tasks
     end
 
-    protected
+    private
 
     def all_tasks
       @result = { tasks: @user.tasks.all }
