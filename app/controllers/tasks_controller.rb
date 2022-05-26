@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :authorize_task
 
   def index
-    fetch_tasks = TasksFetcherService.new(current_user, params).call
+    fetch_tasks = Tasks::TasksFetchService.new(current_user, params).call
     @pagy, @tasks = pagy(fetch_tasks[:tasks])
     flash.now[:notice] = fetch_tasks[:msg] if fetch_tasks[:msg].present?
   end
