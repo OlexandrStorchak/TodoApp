@@ -31,8 +31,11 @@ module Tasks
     end
 
     def tasks_by_user
-      user = User.find_by(id: @params[:user_id])
-      @result = { tasks: user.tasks.all, msg: "Tasks by user : #{user.email}" }
+      if user = User.find_by(id: @params[:user_id])
+        @result = { tasks: user.tasks.all, msg: "Tasks by user : #{user.email}" }
+      else
+        all_tasks
+      end
     end
 
     def all_users_tasks
