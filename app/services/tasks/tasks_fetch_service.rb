@@ -9,8 +9,8 @@ module Tasks
     def call
       return sort_tasks_by_status if @params[:sort_status].present?
       return filter_tasks_by_status if @params[:status].present?
-      return tasks_by_user if @params[:user_id].present?
-      return all_users_tasks if @params[:all_users_tasks].present?
+      return tasks_by_user if @params[:user_id].present? && @user.admin?
+      return all_users_tasks if @params[:all_users_tasks].present? && @user.admin?
 
       all_tasks
     end
