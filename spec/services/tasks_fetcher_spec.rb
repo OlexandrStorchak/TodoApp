@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 RSpec.describe Tasks::TasksFetchService do
   describe 'TasksFetchService' do
     let(:user) { create :user, :user }
