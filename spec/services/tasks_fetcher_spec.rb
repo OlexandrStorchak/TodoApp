@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Tasks::TasksFetchService do
   describe 'TasksFetchService' do
-    let(:user) { User.create(id: 2, email: 'user@user.com', role: 'user') }
-    let(:admin) { User.create(id: 1, role: 'admin') }
+    let(:user) { create :user, :user }
+    let(:admin) { create :user, :admin }
+    let(:user_task) { create_list :task, 10, user_id: user.id }
+    let(:admin_task) { create_list :task, 10, user_id: admin.id }
     it '#all_tasks' do
       result = Tasks::TasksFetchService.new(user, {}).call
       expect(result[:tasks].class).to be_a_kind_of(Task.class)
@@ -17,12 +19,10 @@ RSpec.describe Tasks::TasksFetchService do
       expect(result[:msg].class).not_to eq('All users tasks')
     end
     it '#all_tasks_by_user for admin' do
-      Task.create(title: 'Test task 1', description: 'Test description', user_id: user.id)
       result = Tasks::TasksFetchService.new(admin, { user_id: user.id }).call
       expect(result[:msg]).to eq("Tasks by user : #{user.email}")
     end
     it '#all_tasks_by_user for non admin' do
-      Task.create(title: 'Test task 1', description: 'Test description', user_id: user.id)
       result = Tasks::TasksFetchService.new(user, { user_id: user.id }).call
       expect(result[:msg]).not_to eq("Tasks by user : #{user.email}")
     end
@@ -33,6 +33,14 @@ RSpec.describe Tasks::TasksFetchService do
     it '#filter_tasks_by_status' do
       result = Tasks::TasksFetchService.new(user, { status: 'todo' }).call
       expect(result[:msg]).to eq('Filtered by "Todo" status')
+    end
+    it 'compare result tasks list with expected user' do
+      result = Tasks::TasksFetchService.new(user, {}).call
+      expect(result[:tasks]).to eq(user_task)
+    end
+    it 'compare result tasks list with expected admin' do
+      result = Tasks::TasksFetchService.new(admin, {}).call
+      expect(result[:tasks]).to eq(admin_task)
     end
   end
 end
