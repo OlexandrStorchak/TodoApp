@@ -1,6 +1,8 @@
+require 'ffaker'
+
 FactoryBot.define do
   factory :task do
-    title { 'test title' }
-    description { 'test description' }
+    title { FFaker::Lorem.phrase }
+    description { FFaker::Lorem.paragraphs }
   end
 end
