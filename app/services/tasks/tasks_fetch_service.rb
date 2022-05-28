@@ -17,8 +17,10 @@ module Tasks
 
     private
 
-    def all_tasks
-      @result = { tasks: @user.tasks.all }
+    def all_tasks(msg = nil)
+      return @result = { tasks: @user.tasks.all } if msg.nil?
+
+      @result = { tasks: @user.tasks.all, msg: msg }
     end
 
     def sort_tasks_by_status
@@ -34,7 +36,7 @@ module Tasks
       if user = User.find_by(id: @params[:user_id])
         @result = { tasks: user.tasks.all, msg: "Tasks by user : #{user.email}" }
       else
-        all_tasks
+        all_tasks('user not exist')
       end
     end
 

@@ -10,14 +10,6 @@ class TaskPolicy < ApplicationPolicy
     user.present?
   end
 
-  def tasks_by_user?
-    user.admin?
-  end
-
-  def all_users_tasks?
-    user.admin?
-  end
-
   def new?
     user.present?
   end
@@ -27,7 +19,7 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present?
+    record.user_id == user.id || user.role.admin?
   end
 
   def edit?

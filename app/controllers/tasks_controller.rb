@@ -4,9 +4,8 @@ class TasksController < ApplicationController
   before_action :authorize_task
 
   def index
-    fetch_tasks = Tasks::TasksFetchService.new(current_user, params).call
-    @pagy, @tasks = pagy(fetch_tasks[:tasks])
-    flash.now[:notice] = fetch_tasks[:msg] if fetch_tasks[:msg].present?
+    @pagy, @tasks = pagy(fetch_tasks_service[:tasks])
+    flash.now[:notice] = fetch_tasks_service[:msg] if fetch_tasks_service[:msg].present?
   end
 
   def new
@@ -14,8 +13,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    @task.user_id = current_user.id
+    @task = Task.new(task_params.merge({ user_id: current_user.id }))
     if @task.save
       flash[:notice] = 'Task successfully created'
       redirect_to @task
@@ -24,9 +22,13 @@ class TasksController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    redirect_to_all_tasks if @task.nil?
+  end
 
-  def edit; end
+  def edit
+    redirect_to_all_tasks if @task.nil?
+  end
 
   def update
     if @task.update(task_params)
@@ -45,6 +47,15 @@ class TasksController < ApplicationController
 
   private
 
+  def fetch_tasks_service
+    Tasks::TasksFetchService.new(current_user, params).call
+  end
+
+  def redirect_to_all_tasks
+    redirect_to tasks_path
+    flash[:alert] = 'Task not exist'
+  end
+
   def task_params
     params.require(:task).permit(:title, :description, :status)
   end
@@ -54,6 +65,6 @@ class TasksController < ApplicationController
   end
 
   def authorize_task
-    authorize(@task || Task)
+    authorize(@task || Task.new)
   end
 end
